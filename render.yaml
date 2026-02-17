@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: amas-eclipse-backend
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/provinces
+    envVars:
+      - key: PORT
+        value: "8000"

@@ -57,6 +57,12 @@ python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
 Abrir no navegador: **http://localhost:8000**
 
+## Deploy
+
+- **Frontend (GitHub Pages)**: a pasta `docs/` já está pronta. Em Settings → Pages defina `main` + `/docs`. O site ficará em `https://mirosaide.github.io/AMAS_ECLIPSE_TRACKER/`.
+- **Backend (Render.com)**: o repositório inclui `Dockerfile` e `render.yaml`. No painel Render: *New → Blueprint → Connect repo* e deploy. O serviço será exposto como `https://amas-eclipse-backend.onrender.com` (ou semelhante).
+- **Configurar o frontend**: nos ficheiros `docs/index.html` e `docs/ramadan.html` a variável `window.API_BASE` aponta para `https://amas-eclipse-backend.onrender.com`. Se o domínio final for diferente, actualize essa string.
+
 ## Estrutura do Projecto
 
 ```

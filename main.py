@@ -5,6 +5,7 @@ Para visualização de eclipses em tempo real.
 """
 
 from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, FileResponse
 from datetime import datetime, timezone
@@ -31,6 +32,15 @@ app = FastAPI(
 )
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Allow the static site (GitHub Pages) to call the API from another origin
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def calculate_celestial_positions(lat: float, lon: float, dt: Optional[datetime] = None):
