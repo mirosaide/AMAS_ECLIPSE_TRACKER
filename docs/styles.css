@@ -1,0 +1,1155 @@
+/* ============================================
+   AMAS Eclipse Tracker - Styles
+   Associação Moçambicana de Astronomia
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-primary: #0a0e1a;
+    --bg-secondary: #111827;
+    --bg-card: #1a2235;
+    --bg-card-hover: #1f2a40;
+    --bg-glass: rgba(26, 34, 53, 0.7);
+    --border-color: rgba(99, 102, 241, 0.2);
+    --border-glow: rgba(99, 102, 241, 0.4);
+
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    --accent-sun: #fbbf24;
+    --accent-sun-glow: rgba(251, 191, 36, 0.3);
+    --accent-moon: #c4b5fd;
+    --accent-moon-glow: rgba(196, 181, 253, 0.3);
+    --accent-eclipse: #ef4444;
+    --accent-eclipse-glow: rgba(239, 68, 68, 0.4);
+    --accent-blue: #6366f1;
+    --accent-blue-glow: rgba(99, 102, 241, 0.3);
+    --accent-green: #10b981;
+    --accent-teal: #14b8a6;
+
+    --radius: 16px;
+    --radius-sm: 8px;
+    --radius-lg: 24px;
+
+    --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.15);
+
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Animated star background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 90% 40%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1.5px 1.5px at 15% 75%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1.5px 1.5px at 45% 45%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1.5px 1.5px at 65% 25%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1.5px 1.5px at 85% 65%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 55% 85%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 75% 15%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(2px 2px at 20% 50%, rgba(196, 181, 253, 0.3), transparent),
+        radial-gradient(2px 2px at 80% 30%, rgba(251, 191, 36, 0.2), transparent);
+    pointer-events: none;
+    z-index: 0;
+    animation: twinkle 8s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+
+/* ===== HEADER ===== */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 14, 26, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.75rem 2rem;
+}
+
+.header-inner {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-brand img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+}
+
+.header-brand h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-sun), var(--accent-moon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+.header-brand .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    -webkit-text-fill-color: initial;
+    background: none;
+}
+
+/* Nav links */
+.header-nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 99px;
+    border: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+    border-color: var(--border-color);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.nav-link.active {
+    color: var(--text-primary);
+    border-color: var(--accent-blue);
+    background: var(--accent-blue-glow);
+}
+
+.header-clock {
+    text-align: right;
+}
+
+.header-clock .time {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+}
+
+.header-clock .date {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.header-clock .utc-label {
+    font-size: 0.65rem;
+    color: var(--accent-blue);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* ===== MAIN ===== */
+.main-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 3rem;
+}
+
+/* ===== ECLIPSE BANNER ===== */
+.eclipse-banner {
+    display: none;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(251, 191, 36, 0.1));
+    border: 1px solid var(--accent-eclipse);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    animation: pulse-border 2s ease-in-out infinite;
+    text-align: center;
+}
+
+.eclipse-banner.active {
+    display: block;
+}
+
+.eclipse-banner h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    color: var(--accent-eclipse);
+    margin-bottom: 0.3rem;
+}
+
+.eclipse-banner p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+@keyframes pulse-border {
+    0%, 100% { box-shadow: 0 0 15px var(--accent-eclipse-glow); }
+    50% { box-shadow: 0 0 30px var(--accent-eclipse-glow), 0 0 60px rgba(239, 68, 68, 0.15); }
+}
+
+/* ===== SKY VISUALIZATION ===== */
+.sky-section {
+    margin-bottom: 2rem;
+}
+
+.sky-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.sky-section-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.location-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.location-selector select {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 2rem 0.5rem 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+}
+
+.location-selector select:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px var(--accent-blue-glow);
+}
+
+.sky-canvas-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+}
+
+.sky-canvas-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 40%, rgba(99, 102, 241, 0.03), transparent 50%);
+    pointer-events: none;
+}
+
+#skyCanvas {
+    width: 100%;
+    display: block;
+    border-radius: var(--radius-sm);
+}
+
+.sky-info-panels {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.info-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.info-panel.sun-panel {
+    border-top: 3px solid var(--accent-sun);
+}
+
+.info-panel.moon-panel {
+    border-top: 3px solid var(--accent-moon);
+}
+
+.info-panel.center-panel {
+    border-top: 3px solid var(--accent-eclipse);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+    text-align: center;
+}
+
+.info-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+}
+
+.info-panel-header.center-header {
+    justify-content: center;
+    margin-bottom: 0.4rem;
+}
+
+.info-panel-header h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.sun-panel .info-panel-header h3 {
+    color: var(--accent-sun);
+}
+
+.moon-panel .info-panel-header h3 {
+    color: var(--accent-moon);
+}
+
+.center-panel .info-panel-header h3 {
+    color: var(--text-secondary);
+}
+
+.info-panel-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.info-panel-icon.sun-bg {
+    background: var(--accent-sun-glow);
+    color: var(--accent-sun);
+}
+
+.info-panel-icon.moon-bg {
+    background: var(--accent-moon-glow);
+    color: var(--accent-moon);
+}
+
+.info-panel-icon.sep-bg {
+    background: var(--accent-eclipse-glow);
+    color: var(--accent-eclipse);
+}
+
+.info-panel-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.info-cell:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.info-center-value {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0.25rem 0;
+}
+
+.info-eclipse-status {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-eclipse);
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    background: var(--accent-eclipse-glow);
+}
+
+/* ===== MAP SECTION ===== */
+.map-section {
+    margin-bottom: 2rem;
+}
+
+.map-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.provinces-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+}
+
+.province-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.province-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-sun), var(--accent-moon));
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.province-card:hover {
+    border-color: var(--border-glow);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.province-card:hover::before {
+    opacity: 1;
+}
+
+.province-card.eclipse-active {
+    border-color: var(--accent-eclipse);
+    animation: pulse-border 2s ease-in-out infinite;
+}
+
+.province-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.province-card-header h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.province-card-header .coords {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-family: 'Space Grotesk', monospace;
+}
+
+.province-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.celestial-data {
+    padding: 0.75rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.celestial-data.sun-data {
+    border-left: 3px solid var(--accent-sun);
+}
+
+.celestial-data.moon-data {
+    border-left: 3px solid var(--accent-moon);
+}
+
+.celestial-data .body-name {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.celestial-data .body-name .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.celestial-data .body-name .dot.sun { background: var(--accent-sun); }
+.celestial-data .body-name .dot.moon { background: var(--accent-moon); }
+
+.celestial-data .data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    padding: 2px 0;
+}
+
+.celestial-data .data-row .label {
+    color: var(--text-secondary);
+}
+
+.celestial-data .data-row .val {
+    font-family: 'Space Grotesk', monospace;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.province-eclipse-status {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.province-eclipse-status.no-eclipse {
+    background: rgba(100, 116, 139, 0.1);
+    color: var(--text-muted);
+}
+
+.province-eclipse-status.eclipse {
+    background: var(--accent-eclipse-glow);
+    color: var(--accent-eclipse);
+    font-weight: 700;
+}
+
+.separation-badge {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 99px;
+    background: var(--accent-blue-glow);
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+/* ===== DISTRICT MODAL ===== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 900px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    animation: modalIn 0.3s ease-out;
+}
+
+@keyframes modalIn {
+    from { transform: scale(0.95) translateY(20px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    position: sticky;
+    top: 0;
+    background: var(--bg-secondary);
+    padding: 1.5rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.modal-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+}
+
+.modal-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    background: var(--accent-eclipse);
+    color: white;
+    border-color: var(--accent-eclipse);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.districts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.75rem;
+}
+
+.district-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    transition: var(--transition);
+}
+
+.district-card:hover {
+    border-color: var(--border-glow);
+    background: var(--bg-card-hover);
+}
+
+.district-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.district-card .mini-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+}
+
+.district-card .mini-data .item {
+    display: flex;
+    flex-direction: column;
+}
+
+.district-card .mini-data .item span:first-child {
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.district-card .mini-data .item span:last-child {
+    font-family: 'Space Grotesk', monospace;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.district-card .district-sep {
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+/* ===== ECLIPSE MAP ===== */
+.eclipse-map-section {
+    margin-bottom: 2rem;
+}
+
+.eclipse-map-wrapper {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+}
+
+#eclipseMap {
+    width: 100%;
+    height: 550px;
+    background: #0a0e1a;
+    z-index: 1;
+}
+
+.map-legend {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    z-index: 1000;
+    background: rgba(10, 14, 26, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    max-width: 260px;
+}
+
+.map-legend h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+.legend-color {
+    width: 18px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.legend-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 2px solid;
+}
+
+.legend-marker.sun-marker {
+    background: var(--accent-sun);
+    border-color: #fef08a;
+}
+
+.legend-marker.moon-marker {
+    background: var(--accent-moon);
+    border-color: #e2e8f0;
+}
+
+/* Override Leaflet styles for dark theme */
+.leaflet-container {
+    background: #0a0e1a !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.leaflet-tile-pane {
+    opacity: 0.7;
+}
+
+.leaflet-control-zoom a {
+    background: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.leaflet-control-zoom a:hover {
+    background: var(--bg-card-hover) !important;
+}
+
+.leaflet-control-attribution {
+    background: rgba(10, 14, 26, 0.7) !important;
+    color: var(--text-muted) !important;
+    font-size: 0.6rem !important;
+}
+
+.leaflet-control-attribution a {
+    color: var(--accent-blue) !important;
+}
+
+.province-popup {
+    font-family: 'Inter', sans-serif;
+}
+
+.province-popup h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #1a1a2e;
+}
+
+.province-popup .popup-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 12px;
+    font-size: 0.78rem;
+}
+
+.province-popup .popup-data .label {
+    color: #666;
+}
+
+.province-popup .popup-data .val {
+    font-family: 'Space Grotesk', monospace;
+    font-weight: 600;
+    color: #222;
+}
+
+.province-popup .popup-sep {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.province-popup .popup-sep.eclipse {
+    color: #dc2626;
+}
+
+.province-popup .popup-sep.no-eclipse {
+    color: #6366f1;
+}
+
+/* Province label tooltips on map */
+.province-label {
+    background: rgba(10, 14, 26, 0.85) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    padding: 2px 8px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4) !important;
+}
+
+.province-label::before {
+    border-top-color: rgba(10, 14, 26, 0.85) !important;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 12px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
+}
+
+.leaflet-popup-tip {
+    box-shadow: none !important;
+}
+
+@media (max-width: 768px) {
+    #eclipseMap {
+        height: 400px;
+    }
+
+    .map-legend {
+        max-width: 200px;
+        padding: 8px 10px;
+        font-size: 0.65rem;
+    }
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 2rem;
+}
+
+.footer p {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.footer a {
+    color: var(--accent-blue);
+    text-decoration: none;
+}
+
+.footer .amas-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+}
+
+/* ===== LOADING ===== */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-top-color: var(--accent-blue);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 14, 26, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    z-index: 10;
+}
+
+/* ===== STATUS INDICATOR ===== */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* ===== BELOW HORIZON STYLE ===== */
+.below-horizon {
+    opacity: 0.5;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .header {
+        padding: 0.75rem 1rem;
+    }
+
+    .header-brand h1 {
+        font-size: 1rem;
+    }
+
+    .header-clock .time {
+        font-size: 1.2rem;
+    }
+
+    .main-container {
+        padding: 1rem;
+    }
+
+    .provinces-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sky-info-panels {
+        grid-template-columns: 1fr;
+    }
+
+    #skyCanvas {
+        min-height: 320px;
+    }
+
+    .modal {
+        max-height: 95vh;
+    }
+
+    .modal-overlay {
+        padding: 0.5rem;
+    }
+
+    .districts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sky-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-brand img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .province-data {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}
+
+/* ===== TOOLTIP ===== */
+.tooltip {
+    position: relative;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    padding: 0.4rem 0.7rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+/* Canvas help text */
+.canvas-help {
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    font-style: italic;
+}

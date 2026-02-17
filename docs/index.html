@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMAS Eclipse Tracker — Associação Moçambicana de Astronomia</title>
+    <meta name="description" content="Rastreador em tempo real da posição do Sol e da Lua para todas as províncias e distritos de Moçambique. Desenvolvido pela Associação Moçambicana de Astronomia (AMAS).">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-brand">
+                <img src="logo.png" alt="AMAS Logo">
+                <div>
+                    <h1>AMAS Eclipse Tracker</h1>
+                    <span class="subtitle">Associação Moçambicana de Astronomia</span>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="index.html" class="nav-link active">Eclipse Tracker</a>
+                <a href="ramadan.html" class="nav-link">Ramadão</a>
+            </nav>
+            <div class="header-clock">
+                <div class="time" id="clock-time">--:--:--</div>
+                <div class="date" id="clock-date">--</div>
+                <div class="utc-label" id="clock-utc">UTC+2 (CAT)</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-container">
+
+        <!-- Eclipse Banner -->
+        <div class="eclipse-banner" id="eclipse-banner">
+            <h2>&#9673; Eclipse em Curso!</h2>
+            <p>Dados a carregar...</p>
+        </div>
+
+        <!-- Sky Visualization -->
+        <section class="sky-section">
+            <div class="sky-section-header">
+                <div>
+                    <h2>&#127747; Mapa do Céu</h2>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span>Actualização em tempo real (15s)</span>
+                    </div>
+                </div>
+                <div class="location-selector">
+                    <select id="province-select" title="Seleccionar Província">
+                        <option>A carregar...</option>
+                    </select>
+                    <select id="district-select" title="Seleccionar Distrito">
+                        <option value="">-- Todos os Distritos --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sky-canvas-container">
+                <canvas id="skyCanvas"></canvas>
+                <p class="canvas-help">Eixo vertical: Altitude (acima de 0° = visível, abaixo = não visível) &nbsp;|&nbsp; Eixo horizontal: Azimute (direcção da bússola, N→E→S→W)</p>
+            </div>
+
+            <div class="sky-info-panels">
+                <div class="info-panel sun-panel">
+                    <div class="info-panel-header">
+                        <span class="info-panel-icon sun-bg">&#9728;</span>
+                        <h3>Sol</h3>
+                    </div>
+                    <div class="info-panel-grid">
+                        <div class="info-cell">
+                            <span class="info-label">Altitude</span>
+                            <span class="info-value" id="sun-alt">--</span>
+                        </div>
+                        <div class="info-cell">
+                            <span class="info-label">Azimute</span>
+                            <span class="info-value" id="sun-az">--</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-panel center-panel">
+                    <div class="info-panel-header center-header">
+                        <span class="info-panel-icon sep-bg">&#8982;</span>
+                        <h3>Separação</h3>
+                    </div>
+                    <div class="info-center-value" id="angular-sep">--</div>
+                    <div class="info-eclipse-status" id="eclipse-status">--</div>
+                </div>
+                <div class="info-panel moon-panel">
+                    <div class="info-panel-header">
+                        <span class="info-panel-icon moon-bg">&#9790;</span>
+                        <h3>Lua</h3>
+                    </div>
+                    <div class="info-panel-grid">
+                        <div class="info-cell">
+                            <span class="info-label">Altitude</span>
+                            <span class="info-value" id="moon-alt">--</span>
+                        </div>
+                        <div class="info-cell">
+                            <span class="info-label">Azimute</span>
+                            <span class="info-value" id="moon-az">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Eclipse Map Visualization -->
+        <section class="eclipse-map-section">
+            <div class="sky-section-header">
+                <div>
+                    <h2>&#127758; Mapa de Visibilidade do Eclipse</h2>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span>Mapa interactivo — clique nas províncias para detalhes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="eclipse-map-wrapper">
+                <div id="eclipseMap"></div>
+                <div class="map-legend" id="map-legend">
+                    <h4>Legenda</h4>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: rgba(220,30,30,0.7)"></span>
+                        <span>Eclipse (separação &lt; 0.5°)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: rgba(255,80,50,0.5)"></span>
+                        <span>Muito próximo (&lt; 2°)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: rgba(255,160,50,0.4)"></span>
+                        <span>Próximo (&lt; 5°)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: rgba(100,100,200,0.2)"></span>
+                        <span>Longe (&gt; 5°)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: rgba(50,50,50,0.5); border: 1px dashed #666;"></span>
+                        <span>Sol abaixo do horizonte</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker sun-marker"></span>
+                        <span>Posição do Sol (por província)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker moon-marker"></span>
+                        <span>Posição da Lua (por província)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Provinces Grid -->
+        <section class="map-section">
+            <h2>&#127758; Posições por Província</h2>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1rem;">
+                Clique numa província para ver os detalhes de cada distrito.
+            </p>
+            <div class="provinces-grid" id="provinces-grid">
+                <div style="text-align:center; padding: 3rem; grid-column: 1 / -1;">
+                    <div class="loading-spinner"></div>
+                    <p style="margin-top: 1rem; color: var(--text-muted);">A carregar dados de todas as províncias...</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== DISTRICT MODAL ===== -->
+    <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-title">Distritos</h2>
+                <button class="modal-close" onclick="closeModal()" title="Fechar">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p class="amas-name">Associação Moçambicana de Astronomia (AMAS)</p>
+        <p>Rastreador de Eclipse — Posições do Sol e da Lua em tempo real para Moçambique</p>
+        <p style="margin-top: 0.5rem;">
+            Dados calculados com <a href="https://www.astropy.org/" target="_blank">Astropy</a>
+        </p>
+    </footer>
+
+    <script>
+      // Set this to your backend base URL when hosted elsewhere
+      window.API_BASE = ""; // e.g., "https://amas-backend.example.com"
+    </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
