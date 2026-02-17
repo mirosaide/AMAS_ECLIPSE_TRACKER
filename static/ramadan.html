@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horários do Ramadão — AMAS Moçambique</title>
+    <meta name="description" content="Horários de Fajr, Nascer do Sol, Pôr do Sol (Iftar) e Lua para o Ramadão em todos os distritos de Moçambique. Pela Associação Moçambicana de Astronomia.">
+    <link rel="icon" type="image/png" href="/static/logo.png">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/ramadan.css">
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-brand">
+                <img src="/static/logo.png" alt="AMAS Logo">
+                <div>
+                    <h1>Horários do Ramadão</h1>
+                    <span class="subtitle">Associação Moçambicana de Astronomia</span>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="/" class="nav-link">Eclipse Tracker</a>
+                <a href="/ramadan" class="nav-link active">Ramadão</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main class="main-container">
+
+        <!-- Hero -->
+        <section class="ramadan-hero">
+            <div class="hero-decoration">&#9790;</div>
+            <h2>Ramadão 1447 H — Moçambique</h2>
+            <p class="hero-dates" id="hero-dates">18 Fevereiro — 19 Março 2026</p>
+            <p class="hero-sub">Horários de Fajr (Suhoor), Nascer do Sol, Pôr do Sol (Iftar), Isha e Lua<br>para todas as províncias e distritos de Moçambique</p>
+        </section>
+
+        <!-- Today's overview for all provinces -->
+        <section class="today-section">
+            <div class="section-header">
+                <h2>&#9788; Horários de Hoje — Todas as Províncias</h2>
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span id="today-date">A carregar...</span>
+                </div>
+            </div>
+            <div class="today-table-wrapper">
+                <table class="ramadan-table" id="today-table">
+                    <thead>
+                        <tr>
+                            <th class="col-province">Província</th>
+                            <th class="col-fajr">Fajr<br><small>(Suhoor)</small></th>
+                            <th class="col-sunrise">Nascer Sol</th>
+                            <th class="col-sunset">Pôr do Sol<br><small>(Iftar)</small></th>
+                            <th class="col-isha">Isha</th>
+                            <th class="col-moonrise">Nascer Lua</th>
+                            <th class="col-moonset">Pôr Lua</th>
+                            <th class="col-fast">Duração<br><small>do Jejum</small></th>
+                        </tr>
+                    </thead>
+                    <tbody id="today-tbody">
+                        <tr>
+                            <td colspan="8" style="text-align:center; padding:2rem;">
+                                <div class="loading-spinner"></div>
+                                <p style="margin-top:0.5rem; color:var(--text-muted);">A calcular horários...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Monthly calendar for selected location -->
+        <section class="month-section">
+            <div class="section-header">
+                <h2>&#9783; Calendário Mensal do Ramadão</h2>
+                <div class="location-selector">
+                    <select id="ram-province-select" title="Seleccionar Província">
+                        <option>A carregar...</option>
+                    </select>
+                </div>
+            </div>
+            <p class="section-sub">Todos os 30 dias do Ramadão para a localização seleccionada.</p>
+
+            <div class="month-table-wrapper">
+                <table class="ramadan-table month-table" id="month-table">
+                    <thead>
+                        <tr>
+                            <th class="col-day">Dia</th>
+                            <th class="col-date">Data</th>
+                            <th class="col-weekday">Dia Semana</th>
+                            <th class="col-fajr">Fajr<br><small>(Suhoor)</small></th>
+                            <th class="col-sunrise">Nascer Sol</th>
+                            <th class="col-sunset">Pôr do Sol<br><small>(Iftar)</small></th>
+                            <th class="col-isha">Isha</th>
+                            <th class="col-moonrise">Nascer Lua</th>
+                            <th class="col-moonset">Pôr Lua</th>
+                            <th class="col-fast">Jejum</th>
+                        </tr>
+                    </thead>
+                    <tbody id="month-tbody">
+                        <tr>
+                            <td colspan="10" style="text-align:center; padding:2rem;">
+                                <div class="loading-spinner"></div>
+                                <p style="margin-top:0.5rem; color:var(--text-muted);">Seleccione uma província e aguarde...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- District detail -->
+        <section class="district-section">
+            <div class="section-header">
+                <h2>&#9758; Horários por Distrito</h2>
+                <div class="location-selector">
+                    <select id="ram-district-province" title="Seleccionar Província">
+                        <option>A carregar...</option>
+                    </select>
+                    <button class="btn-load" id="btn-load-districts" onclick="loadDistrictData()">Ver Distritos</button>
+                </div>
+            </div>
+            <p class="section-sub">Horários de hoje para todos os distritos da província seleccionada.</p>
+
+            <div class="district-table-wrapper" id="district-table-wrapper">
+                <p style="text-align:center; color:var(--text-muted); padding:2rem;">
+                    Seleccione uma província e clique "Ver Distritos".
+                </p>
+            </div>
+        </section>
+
+        <!-- Info -->
+        <section class="info-section">
+            <h3>&#9733; Sobre os Horários</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Fajr (Suhoor)</h4>
+                    <p>Início do jejum. Calculado quando o Sol está a -18° abaixo do horizonte (crepúsculo astronómico). A última refeição antes do amanhecer deve ser feita antes deste horário.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Nascer do Sol</h4>
+                    <p>Momento em que o disco solar aparece no horizonte. O período de jejum está em vigor desde o Fajr.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Pôr do Sol (Iftar)</h4>
+                    <p>Fim do jejum diário. O momento em que o disco solar desaparece abaixo do horizonte. Hora de quebrar o jejum.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Isha</h4>
+                    <p>Oração da noite. Calculado quando o Sol está a -18° abaixo do horizonte após o pôr do sol. Início da oração de Tarawih.</p>
+                </div>
+            </div>
+            <p class="info-note">
+                <strong>Nota:</strong> Os horários são calculados astronomicamente usando Astropy e podem variar ligeiramente em relação a horários publicados por organizações islâmicas, que podem usar convenções diferentes para o ângulo do Fajr. Recomenda-se adicionar uma margem de segurança de ~5 minutos. Todos os horários estão em CAT (UTC+2), hora oficial de Moçambique.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p class="amas-name">Associação Moçambicana de Astronomia (AMAS)</p>
+        <p>Horários do Ramadão para Moçambique — Calculados com Astropy</p>
+        <p style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">
+            Ramadão Mubarak! Que este mês sagrado traga paz e bênçãos a toda a comunidade.
+        </p>
+    </footer>
+
+    <script src="/static/ramadan.js"></script>
+</body>
+</html>
