@@ -1,0 +1,371 @@
+/* ============================================
+   AMAS — Planets Page Styles
+   ============================================ */
+
+.planets-hero {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(212, 165, 116, 0.06));
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: var(--radius-lg);
+}
+
+.planets-hero h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #818cf8, #f4d47c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.planets-hero .hero-sub {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* ===== SKY DOME ===== */
+.sky-dome-section {
+    margin-bottom: 2rem;
+}
+
+.sky-dome-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    justify-content: center;
+}
+
+#skyDome {
+    display: block;
+    max-width: 100%;
+}
+
+/* ===== PLANET CARDS ===== */
+.planets-cards-section {
+    margin-bottom: 2rem;
+}
+
+.planets-cards-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.planets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.planet-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.planet-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--planet-color, var(--accent-blue));
+}
+
+.planet-card:hover {
+    border-color: var(--border-glow);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.planet-card.below-horizon {
+    opacity: 0.5;
+}
+
+.planet-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.planet-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    border: 2px solid;
+}
+
+.planet-card-header .planet-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.planet-card-header .planet-desc {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-top: 2px;
+}
+
+.planet-visibility-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 99px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.planet-visibility-badge.visible {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.planet-visibility-badge.not-visible {
+    background: rgba(100, 116, 139, 0.15);
+    color: #64748b;
+}
+
+/* Period bar */
+.planet-period {
+    margin-bottom: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+}
+
+.period-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+}
+
+.period-label {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.rise-label {
+    color: #10b981;
+}
+
+.set-label {
+    color: #f97316;
+}
+
+.period-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.period-fill {
+    height: 100%;
+    border-radius: 3px;
+    opacity: 0.5;
+    width: 100%;
+}
+
+.period-text {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.period-text strong {
+    color: var(--text-primary);
+    font-family: 'Space Grotesk', monospace;
+}
+
+/* Rise/Set time colors */
+.rise-time {
+    color: #10b981 !important;
+}
+
+.set-time {
+    color: #f97316 !important;
+}
+
+.planet-data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1rem;
+}
+
+.planet-data-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.planet-data-item .pd-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.planet-data-item .pd-value {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.planet-data-item.full-width {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.duration-time {
+    color: var(--accent-teal) !important;
+    font-size: 1rem !important;
+}
+
+/* ===== PROVINCES TABLE ===== */
+.provinces-overview-section {
+    margin-bottom: 2rem;
+}
+
+.provinces-overview-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.section-sub {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.prov-planets-table-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    box-shadow: var(--shadow-card);
+}
+
+.prov-planets-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.prov-planets-table th {
+    padding: 0.75rem 0.6rem;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--border-color);
+    background: rgba(99, 102, 241, 0.06);
+}
+
+.prov-planets-table th:first-child {
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.planet-th {
+    font-size: 1.3rem !important;
+    min-width: 50px;
+}
+
+.prov-planets-table td {
+    padding: 0.6rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    font-size: 0.85rem;
+}
+
+.prov-planets-table td:first-child {
+    text-align: left;
+    padding-left: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.prov-planets-table tbody tr:hover {
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.visibility-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.visibility-dot.up {
+    background: #10b981;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+}
+
+.visibility-dot.down {
+    background: #334155;
+}
+
+.alt-text {
+    display: block;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.7rem;
+    margin-top: 2px;
+}
+
+.alt-text.up {
+    color: #10b981;
+}
+
+.alt-text.down {
+    color: #475569;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .planets-hero h2 {
+        font-size: 1.2rem;
+    }
+
+    .planets-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #skyDome {
+        max-width: 100%;
+    }
+}

@@ -24,6 +24,8 @@ from ramadan import (
     get_ramadan_month, get_today_all_provinces, calculate_day_times,
     RAMADAN_START, RAMADAN_END, RAMADAN_DAYS
 )
+from planets import calculate_planet_positions, calculate_all_provinces_planets, PLANETS
+from easter import get_easter_data, compute_easter, get_related_dates, format_date_pt
 
 app = FastAPI(
     title="AMAS Eclipse Tracker",
@@ -352,3 +354,53 @@ async def api_ramadan_province(province: str):
         }
 
     return results
+
+
+# =============================================
+# PLANETAS ENDPOINTS
+# =============================================
+
+@app.get("/planets", response_class=HTMLResponse)
+async def planets_page():
+    """Serve a página dos planetas."""
+    return FileResponse("static/planets.html")
+
+
+@app.get("/api/planets/info")
+async def api_planets_info():
+    """Retorna informação sobre os planetas."""
+    return PLANETS
+
+
+@app.get("/api/planets/positions")
+async def api_planets_positions(
+    lat: float = Query(..., description="Latitude"),
+    lon: float = Query(..., description="Longitude"),
+):
+    """Calcula posições de todos os planetas para uma localização."""
+    return calculate_planet_positions(lat, lon)
+
+
+@app.get("/api/planets/all-provinces")
+async def api_planets_all_provinces():
+    """Posição dos planetas para todas as capitais de província."""
+    return calculate_all_provinces_planets(MOZAMBIQUE_LOCATIONS)
+
+
+# =============================================
+# PÁSCOA ENDPOINTS
+# =============================================
+
+@app.get("/easter", response_class=HTMLResponse)
+async def easter_page():
+    """Serve a página da Páscoa."""
+    return FileResponse("static/easter.html")
+
+
+@app.get("/api/easter")
+async def api_easter(
+    start_year: int = Query(2026, description="Ano inicial"),
+    num_years: int = Query(10, description="Número de anos"),
+):
+    """Retorna datas da Páscoa e festas relacionadas."""
+    return get_easter_data(start_year, min(num_years, 30))

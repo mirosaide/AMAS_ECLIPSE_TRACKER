@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Páscoa — AMAS Moçambique</title>
+    <meta name="description" content="Datas da Páscoa e festas litúrgicas relacionadas para os próximos 10 anos. Pela Associação Moçambicana de Astronomia.">
+    <link rel="icon" type="image/png" href="/static/logo.png">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/easter.css">
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-brand">
+                <img src="/static/logo.png" alt="AMAS Logo">
+                <div>
+                    <h1>Datas da Páscoa</h1>
+                    <span class="subtitle">Associação Moçambicana de Astronomia</span>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="/" class="nav-link">Eclipse</a>
+                <a href="/ramadan" class="nav-link">Ramadão</a>
+                <a href="/planets" class="nav-link">Planetas</a>
+                <a href="/easter" class="nav-link active">Páscoa</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main class="main-container">
+
+        <!-- Hero -->
+        <section class="easter-hero">
+            <div class="hero-decoration">&#10013;</div>
+            <h2>Datas da Páscoa</h2>
+            <p class="hero-sub">A Páscoa é calculada como o primeiro domingo após a primeira lua cheia
+                que ocorre em ou após o equinócio de Março (21 de Março).<br>
+                Aqui apresentamos as datas para os próximos 10 anos, incluindo as festas litúrgicas associadas.</p>
+        </section>
+
+        <!-- Year range selector -->
+        <section class="controls-section">
+            <div class="controls-row">
+                <label for="start-year">Ano Inicial:</label>
+                <input type="number" id="start-year" value="2026" min="1583" max="9999">
+                <label for="num-years">Número de Anos:</label>
+                <input type="number" id="num-years" value="10" min="1" max="30">
+                <button id="btn-load" class="btn-primary">Consultar</button>
+            </div>
+        </section>
+
+        <!-- Timeline visual -->
+        <section class="timeline-section">
+            <h2>&#128197; Linha Temporal</h2>
+            <div id="timeline-container" class="timeline-container">
+                <p class="loading-text">A carregar datas...</p>
+            </div>
+        </section>
+
+        <!-- Detailed table -->
+        <section class="table-section">
+            <h2>&#128203; Tabela Detalhada</h2>
+            <div class="table-scroll">
+                <table id="easter-table" class="easter-table">
+                    <thead>
+                        <tr>
+                            <th>Ano</th>
+                            <th>Quarta de Cinzas</th>
+                            <th>Domingo de Ramos</th>
+                            <th>Quinta Santa</th>
+                            <th>Sexta Santa</th>
+                            <th class="highlight-col">Páscoa</th>
+                            <th>Ascensão</th>
+                        </tr>
+                    </thead>
+                    <tbody id="easter-tbody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Info section -->
+        <section class="info-section">
+            <h2>Sobre o Cálculo da Páscoa</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>&#127769; Base Astronómica</h3>
+                    <p>A data da Páscoa depende do ciclo lunar. É definida como o primeiro domingo após a
+                        primeira lua cheia (Lua Cheia Pascal) que ocorre em ou após 21 de Março, o equinócio
+                        vernal eclesiástico.</p>
+                </div>
+                <div class="info-card">
+                    <h3>&#128290; Algoritmo</h3>
+                    <p>Utilizamos o algoritmo de Meeus/Jones/Butcher (computus), válido para todos os anos
+                        do calendário gregoriano (a partir de 1583). Este algoritmo é determinístico e não
+                        depende de observação astronómica directa.</p>
+                </div>
+                <div class="info-card">
+                    <h3>&#128197; Datas Móveis</h3>
+                    <p>A Páscoa determina um conjunto de festas litúrgicas móveis: Quarta de Cinzas (46 dias antes),
+                        Domingo de Ramos (7 dias antes), Quinta e Sexta Santas (3 e 2 dias antes)
+                        e Ascensão (39 dias depois).</p>
+                </div>
+                <div class="info-card">
+                    <h3>&#127759; Em Moçambique</h3>
+                    <p>A Sexta-Feira Santa é feriado nacional em Moçambique. A data da Páscoa é importante para
+                        o planeamento de actividades religiosas, sociais e escolares em todo o país.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p>AMAS — Associação Moçambicana de Astronomia</p>
+        <p class="footer-sub">Cálculo por algoritmo de Meeus (Computus) &bull; Datas do calendário gregoriano</p>
+    </footer>
+
+    <script src="/static/easter.js"></script>
+</body>
+</html>

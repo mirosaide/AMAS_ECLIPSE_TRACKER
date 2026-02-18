@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planetas — AMAS Moçambique</title>
+    <meta name="description" content="Posição dos planetas do sistema solar vistos de Moçambique em tempo real. Pela Associação Moçambicana de Astronomia.">
+    <link rel="icon" type="image/png" href="/static/logo.png">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/planets.css">
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-brand">
+                <img src="/static/logo.png" alt="AMAS Logo">
+                <div>
+                    <h1>Planetas do Sistema Solar</h1>
+                    <span class="subtitle">Associação Moçambicana de Astronomia</span>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="/" class="nav-link">Eclipse</a>
+                <a href="/ramadan" class="nav-link">Ramadão</a>
+                <a href="/planets" class="nav-link active">Planetas</a>
+                <a href="/easter" class="nav-link">Páscoa</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main class="main-container">
+
+        <!-- Hero -->
+        <section class="planets-hero">
+            <h2>Sistema Solar — Visto de Moçambique</h2>
+            <p class="hero-sub">Posição em tempo real dos planetas no céu de Moçambique. Descubra quais estão visíveis esta noite.</p>
+            <div class="location-selector" style="justify-content:center; margin-top:1rem;">
+                <select id="planet-province-select" title="Seleccionar Província">
+                    <option>A carregar...</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Sky dome visualization -->
+        <section class="sky-dome-section">
+            <div class="sky-dome-container">
+                <canvas id="skyDome"></canvas>
+            </div>
+            <p class="canvas-help">Vista do céu — centro = zénite (directamente acima), borda = horizonte. Planetas acima do horizonte estão visíveis.</p>
+        </section>
+
+        <!-- Planet cards -->
+        <section class="planets-cards-section">
+            <h2>Detalhes dos Planetas</h2>
+            <div class="planets-grid" id="planets-grid">
+                <div style="text-align:center; padding:3rem; grid-column:1/-1;">
+                    <div class="loading-spinner"></div>
+                    <p style="margin-top:1rem; color:var(--text-muted);">A calcular posições dos planetas...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Provinces overview -->
+        <section class="provinces-overview-section">
+            <h2>Visibilidade por Província</h2>
+            <p class="section-sub">Quais planetas estão acima do horizonte em cada província neste momento.</p>
+            <div class="prov-planets-table-wrapper">
+                <table class="prov-planets-table" id="prov-planets-table">
+                    <thead>
+                        <tr>
+                            <th>Província</th>
+                            <th class="planet-th" style="color:#b0b0b0">☿</th>
+                            <th class="planet-th" style="color:#f5deb3">♀</th>
+                            <th class="planet-th" style="color:#e25822">♂</th>
+                            <th class="planet-th" style="color:#d4a574">♃</th>
+                            <th class="planet-th" style="color:#f4d47c">♄</th>
+                            <th class="planet-th" style="color:#73c2d4">⛢</th>
+                            <th class="planet-th" style="color:#4166f5">♆</th>
+                        </tr>
+                    </thead>
+                    <tbody id="prov-planets-tbody">
+                        <tr><td colspan="8" style="text-align:center;padding:2rem;"><div class="loading-spinner"></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p class="amas-name">Associação Moçambicana de Astronomia (AMAS)</p>
+        <p>Visualização dos planetas do Sistema Solar — Calculado com Astropy</p>
+    </footer>
+
+    <script src="/static/planets.js"></script>
+</body>
+</html>
