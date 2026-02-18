@@ -49,13 +49,6 @@ cd Eclipse
 pip install -r requirements.txt
 ```
 
-## Execução
-
-```bash
-python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-```
-
-Abrir no navegador: **http://localhost:8000**
 
 ## Deploy
 
@@ -83,22 +76,6 @@ Eclipse/
     └── logo.png         # Logo AMAS
 ```
 
-## API Endpoints
-
-| Endpoint | Descrição |
-|----------|-----------|
-| `GET /` | Página principal |
-| `GET /api/positions?lat=&lon=` | Posição do Sol/Lua para coordenadas |
-| `GET /api/all-provinces-positions` | Posições para todas as províncias |
-| `GET /api/province-details/{province}` | Dados de todos os distritos de uma província |
-| `GET /api/provinces` | Lista de províncias |
-| `GET /api/districts/{province}` | Lista de distritos de uma província |
-| `GET /api/eclipse-grid` | Grelha de visibilidade do eclipse |
-| `GET /ramadan` | Página dos Horários do Ramadão |
-| `GET /api/ramadan/info` | Info sobre datas do Ramadão |
-| `GET /api/ramadan/today` | Horários de hoje (todas as províncias) |
-| `GET /api/ramadan/month?lat=&lon=` | Horários de todo o mês do Ramadão |
-| `GET /api/ramadan/province/{province}` | Horários dos distritos (hoje) |
 
 ## Exemplo de Resposta da API
 
